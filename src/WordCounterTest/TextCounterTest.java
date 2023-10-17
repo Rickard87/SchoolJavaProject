@@ -1,9 +1,7 @@
 package WordCounterTest;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 public class TextCounterTest
 {
@@ -15,7 +13,7 @@ public class TextCounterTest
         counter.addLine("This is a test.");
         counter.addLine("Another line.");
         int characterCount = counter.getCharacterCount();
-        assertEquals(28, characterCount);
+        Assertions.assertEquals(28, characterCount);
     }
 
     @Test
@@ -26,7 +24,7 @@ public class TextCounterTest
         counter.addLine("Line 2");
         counter.addLine("Line 3");
         int lineCount = counter.getLineCount();
-        assertEquals(3, lineCount);
+        Assertions.assertEquals(3, lineCount);
     }
 
     @Test
@@ -37,7 +35,7 @@ public class TextCounterTest
         counter.addLine("Line 2");
         counter.addLine("stop");
         int lineCount = counter.getLineCount();
-        assertEquals(2, lineCount);
+        Assertions.assertEquals(2, lineCount);
     }
 
     @Test
@@ -47,7 +45,7 @@ public class TextCounterTest
         counter.addLine("This is a test.");
         counter.addLine("Count these words.");
         int wordCount = counter.getWordCount();
-        assertEquals(7, wordCount);
+        Assertions.assertEquals(7, wordCount);
     }
 
     @Test
@@ -57,7 +55,7 @@ public class TextCounterTest
         counter.addLine("This is a test.");
         counter.addLine("Longest word in this line is 'elephant'."); //Längsta ordet avslutas med punkt
         String longestWord = counter.getLongestWord();
-        assertEquals("'elephant'", longestWord);
+        Assertions.assertEquals("'elephant'", longestWord);
     }
 
     @Test
@@ -66,8 +64,8 @@ public class TextCounterTest
         TextCounter counter = new TextCounter();
         counter.addLine("This is a test.");
         counter.addLine("Another line.");
-        assertFalse(counter.userTypedStop());
+        Assertions.assertFalse(counter.userTypedStop());
         counter.addLine("stop");
-        assertTrue(counter.userTypedStop());
+        Assertions.assertTrue(counter.userTypedStop());
     }
 }
