@@ -1,4 +1,3 @@
-package WordCounterTest;
 package TextCounter;
 
 import org.junit.jupiter.api.Assertions;
