@@ -24,14 +24,14 @@ class TextCounter
         {
             lineCount++;
             characterCount += line.length();
-            String[] words = line.split("\\s+"); // Dela upp raden i ord
+            String[] words = line.split("\\s+"); // Dela upp raden i ord, \\s är "white space", blanksteg, kommatecken etc.
+            //läs mer om det här https://stackoverflow.com/questions/13750716/what-does-regular-expression-s-s-do
+            //https://www.regular-expressions.info/shorthand.html
             for (String word : words)
             {
-                while(word.charAt(word.length()-1) == '.') //Change to while
+                while(word.charAt(word.length()-1) == '.') //En while-loop kontrollerar om sista tecknet i sista ordet är en punkt ända tills ordet inte avslutas med punkt längre
                 {
-                    System.out.println(word);
                     word = RemoveLastCharOfString(word);
-                    System.out.println(word);
                 }
                 wordCount++;
                 if (word.length() > longestWord.length())
@@ -46,32 +46,32 @@ class TextCounter
         }
     }
 
-    public int getLineCount()
+    public int getLineCount() //returnerar antalet rader till användaren
     {
         return lineCount;
     }
 
-    public int getCharacterCount()
+    public int getCharacterCount() //returnerar antalet tecken till användaren
     {
         return characterCount;
     }
 
-    public int getWordCount()
+    public int getWordCount() //returnerar antalet ord till användaren
     {
         return wordCount;
     }
 
-    public String getLongestWord()
+    public String getLongestWord() //returnerar det längsta ordet till användaren
     {
         return longestWord;
     }
 
-    public boolean userTypedStop()
+    public boolean userTypedStop() //returnerar kontrollvärde (bool) för om användaren skrivit stop
     {
         return userTypedStop;
     }
 
-    public String RemoveLastCharOfString(String word)
+    public String RemoveLastCharOfString(String word) //funktion för att ta bort sista tecknet i en String
     {
         String result = null;
         if ((word != null) && (word.length() > 0)) {
@@ -83,7 +83,7 @@ class TextCounter
 
 class TextReader
 {
-    public void readTextAndPrintResults()
+    public void readTextAndPrintResults() //funktion för inmatning, kontroll om användaren skrivit 'stop' och utskrivning av resultat
     {
         Scanner scanner = new Scanner(System.in);
         TextCounter counter = new TextCounter();
@@ -112,13 +112,5 @@ class TextReader
         System.out.println("Det längsta ordet: " + longestWord);
 
         scanner.close();
-    }
-    public String RemoveLastCharOfString(String word)
-    {
-        String result = null;
-        if ((word != null) && (word.length() > 0)) {
-            result = word.substring(0, word.length() - 1);
-        }
-        return result;
     }
 }

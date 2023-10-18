@@ -20,9 +20,7 @@ public class TextCounter
             {
                 while(word.charAt(word.length()-1) == '.') //Change to while
                 {
-                    System.out.println(word);
                     word = RemoveLastCharOfString(word);
-                    System.out.println(word);
                 }
                 wordCount++;
                 if (word.length() > longestWord.length())

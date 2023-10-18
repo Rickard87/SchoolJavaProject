@@ -1,4 +1,5 @@
 package WordCounterTest;
+package TextCounter;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -53,9 +54,9 @@ public class TextCounterTest
     {
         TextCounter counter = new TextCounter();
         counter.addLine("This is a test.");
-        counter.addLine("Longest word in this line is 'elephant'."); //Längsta ordet avslutas med punkt
+        counter.addLine("The longest word in this test is 'nationalencyklopedin'."); //Längsta ordet avslutas med punkt
         String longestWord = counter.getLongestWord();
-        Assertions.assertEquals("'elephant'", longestWord); //Förväntat resultat, utan punkt
+        Assertions.assertEquals("'nationalencyklopedin'", longestWord); //Förväntat resultat, utan punkt
     }
 
     @Test
