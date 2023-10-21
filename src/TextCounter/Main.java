@@ -1,5 +1,5 @@
 package TextCounter;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main
 {
@@ -16,6 +16,7 @@ class TextCounter
     private int characterCount = 0;
     private int wordCount = 0;
     private String longestWord = "";
+    private final ArrayList<String> longestWords = new ArrayList<>();
     private boolean userTypedStop = false;
 
     public void addLine(String line)
@@ -37,6 +38,12 @@ class TextCounter
                 if (word.length() > longestWord.length())
                 {
                     longestWord = word;
+                    longestWords.clear();
+                    longestWords.add(word);
+                }
+                else if(word.length() == longestWord.length())
+                {
+                    longestWords.add(word);
                 }
             }
         }
@@ -66,6 +73,11 @@ class TextCounter
         return longestWord;
     }
 
+    public ArrayList<String> getLongestWords()
+    {
+        return longestWords;
+    }
+
     public boolean userTypedStop() //returnerar kontrollvärde (bool) för om användaren skrivit stop
     {
         return userTypedStop;
@@ -74,7 +86,7 @@ class TextCounter
     public String RemoveLastCharOfString(String word) //funktion för att ta bort sista tecknet i en String
     {
         String result = null;
-        if ((word != null) && (word.length() > 0)) {
+        if ((word != null) && (!word.isEmpty())) {
             result = word.substring(0, word.length() - 1);
         }
         return result;
@@ -90,27 +102,57 @@ class TextReader
 
         System.out.println("Skriv in text (skriv 'stop' för att avsluta):");
 
-        while (!counter.userTypedStop())
+        try
         {
-            String inputLine = scanner.nextLine();
-            counter.addLine(inputLine);
-
-            if (counter.userTypedStop()) //Works as a fail-safe
+            while (!counter.userTypedStop())
             {
-                break;
+                String inputLine = scanner.nextLine();
+                counter.addLine(inputLine);
+
+                if (counter.userTypedStop()) //Works as a fail-safe
+                {
+                    break;
+                }
             }
+        }
+        catch (NoSuchElementException e) //Extends InputMismatchException
+        {
+            System.err.println("Det uppstod ett fel vid inmatningen: " + e.getMessage());
+            System.out.println("------------------ \n");
+        }
+        catch(StringIndexOutOfBoundsException e)
+        {
+            System.out.println("Du skulle skriva in text, försök igen.");
+            System.out.println("------------------ \n");
+        }
+
+        catch (Exception e) //För alla andra exceptions
+        {
+            System.out.println("Något oväntat gick fel." + "\n" + "Vänligen kontakta mig på rickard.jansson.apps@gmail.com om felet kvarstår.");
+            System.out.println("------------------ \n");
+        }
+        finally
+        {
+            scanner.close();
+            System.out.println("Inmatningen är avslutad. Resultat: ");
+            System.out.println("------------------ \n");
         }
 
         int characterCount = counter.getCharacterCount();
         int lineCount = counter.getLineCount();
         int wordCount = counter.getWordCount();
-        String longestWord = counter.getLongestWord();
+        ArrayList<String> longestWords = counter.getLongestWords();
 
         System.out.println("Antal tecken (inklusive blanksteg): " + characterCount);
         System.out.println("Antal rader (exklusive raden med 'stop'): " + lineCount);
         System.out.println("Antal ord: " + wordCount);
-        System.out.println("Det längsta ordet: " + longestWord);
-
-        scanner.close();
+        if(longestWords.size() == 1)
+        {
+            System.out.println("Det längsta ordet: " + longestWords.get(0));
+        }
+        else if(longestWords.size() > 1)
+        {
+            System.out.println("De längsta orden: " + String.join(", ", longestWords));
+        }
     }
 }

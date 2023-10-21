@@ -3,6 +3,8 @@ package TextCounter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 public class TextCounterTest
 {
 
@@ -56,6 +58,22 @@ public class TextCounterTest
         counter.addLine("The longest word in this test is 'nationalencyklopedin'."); //Längsta ordet avslutas med punkt
         String longestWord = counter.getLongestWord();
         Assertions.assertEquals("'nationalencyklopedin'", longestWord); //Förväntat resultat, utan punkt
+        String longestWordFromList = counter.getLongestWords().get(0);
+        Assertions.assertEquals(("'nationalencyklopedin'"), longestWordFromList); //Vi förväntar oss också samma ord från ordlistan på plats 0.
+    }
+
+    @Test
+    public void testLongestWords()
+    {
+        TextCounter counter = new TextCounter();
+        counter.addLine("This is a test.");
+        counter.addLine("In this test we are testing the result");
+        counter.addLine("of our efforts to show words that");
+        counter.addLine("have the same length as each other");
+        counter.addLine("Seven letter words, such as tripods and bIcYcLe");
+        ArrayList<String> longestWords = counter.getLongestWords();
+        String longestWordsWithSplit = String.join(", ", longestWords);
+        Assertions.assertEquals("testing, efforts, tripods, bIcYcLe", longestWordsWithSplit); //Förväntat resultat skrivs ut med komma-tecken som split
     }
 
     @Test
