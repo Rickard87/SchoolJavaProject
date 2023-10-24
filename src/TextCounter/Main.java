@@ -9,7 +9,7 @@ public class Main
         reader.readTextAndPrintResults();
     }
 }
-class TextCounter
+class TextCounter //Klass för att deklarera/beräkna/distribuera/returnera inläsning av rader
 {
     //<editor-fold desc="Klassvariabler">
     private int lineCount = 0;
@@ -20,7 +20,7 @@ class TextCounter
     private boolean userTypedStop = false;
     //</editor-fold>
 
-    //<editor-fold desc="Deklareringsmetoder">
+    //<editor-fold desc="Deklarering och beräkning">
     public void addLine(String line)
     {
         if (!line.equalsIgnoreCase("stop")) // Exkluderar "stop"-raden
@@ -96,9 +96,9 @@ class TextCounter
     }
     //</editor-fold>
 }
-class TextReader
+class TextReader //Klass för inläsning av rader och utskrift av resultat från TextCounter
 {
-    public void readTextAndPrintResults() //funktion för inmatning, kontroll om användaren skrivit 'stop' och utskrivning av resultat
+    public void readTextAndPrintResults() //Funktion för inmatning, felhantering inläsning och utskrivning av resultat
     {
         //<editor-fold desc="Inläsning">
         Scanner scanner = new Scanner(System.in);

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class TextCounterTest
 {
-
+    //<editor-fold desc="Tester för korrekt beräkning">
     @Test
     public void testCharacterCount() //Beräknat antal tecken inkluderar blanksteg och skiljetecken
     {
@@ -75,7 +75,9 @@ public class TextCounterTest
         String longestWordsWithSplit = String.join(", ", longestWords);
         Assertions.assertEquals("testing, efforts, tripods, bIcYcLe", longestWordsWithSplit); //Förväntat resultat skrivs ut med komma-tecken som split
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Tester för korrekt terminering">
     @Test
     public void testUserTypedStopLowerCase() //Testar om boolean userTypedStop() deklareras 'false' med endast gemener
     {
@@ -110,4 +112,5 @@ public class TextCounterTest
         counter.addLine("stop!");
         Assertions.assertFalse(counter.userTypedStop());
     }
+    //</editor-fold>
 }
