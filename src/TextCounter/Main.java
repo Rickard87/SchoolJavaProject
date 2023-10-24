@@ -9,16 +9,18 @@ public class Main
         reader.readTextAndPrintResults();
     }
 }
-
 class TextCounter
 {
+    //<editor-fold desc="Klassvariabler">
     private int lineCount = 0;
     private int characterCount = 0;
     private int wordCount = 0;
     private String longestWord = "";
     private final ArrayList<String> longestWords = new ArrayList<>();
     private boolean userTypedStop = false;
+    //</editor-fold>
 
+    //<editor-fold desc="Deklareringsmetoder">
     public void addLine(String line)
     {
         if (!line.equalsIgnoreCase("stop")) // Exkluderar "stop"-raden
@@ -52,7 +54,17 @@ class TextCounter
             userTypedStop = true;
         }
     }
+    public String RemoveLastCharOfString(String word) //funktion för att ta bort sista tecknet i en String
+    {
+        String result = null;
+        if ((word != null) && (!word.isEmpty())) {
+            result = word.substring(0, word.length() - 1);
+        }
+        return result;
+    }
+    //</editor-fold>
 
+    //<editor-fold desc="Returneringsmetoder">
     public int getLineCount() //returnerar antalet rader till användaren
     {
         return lineCount;
@@ -82,26 +94,20 @@ class TextCounter
     {
         return userTypedStop;
     }
-
-    public String RemoveLastCharOfString(String word) //funktion för att ta bort sista tecknet i en String
-    {
-        String result = null;
-        if ((word != null) && (!word.isEmpty())) {
-            result = word.substring(0, word.length() - 1);
-        }
-        return result;
-    }
+    //</editor-fold>
 }
-
 class TextReader
 {
     public void readTextAndPrintResults() //funktion för inmatning, kontroll om användaren skrivit 'stop' och utskrivning av resultat
     {
+        //<editor-fold desc="Inläsning">
         Scanner scanner = new Scanner(System.in);
         TextCounter counter = new TextCounter();
 
         System.out.println("Skriv in text (skriv 'stop' för att avsluta):");
+        //</editor-fold>
 
+        //<editor-fold desc="Inläsning felhantering">
         try
         {
             while (!counter.userTypedStop())
@@ -137,7 +143,9 @@ class TextReader
             System.out.println("Inmatningen är avslutad. Resultat: ");
             System.out.println("------------------ \n");
         }
+        //</editor-fold>
 
+        //<editor-fold desc="Utskrift resultat">
         int characterCount = counter.getCharacterCount();
         int lineCount = counter.getLineCount();
         int wordCount = counter.getWordCount();
@@ -154,5 +162,6 @@ class TextReader
         {
             System.out.println("De längsta orden: " + String.join(", ", longestWords));
         }
+        //</editor-fold>
     }
 }
