@@ -11,43 +11,59 @@ public class TextCounterTest
     @Test
     public void testCharacterCount() //Beräknat antal tecken inkluderar blanksteg och skiljetecken
     {
+        //Arrange
         TextCounter counter = new TextCounter();
         counter.addLine("This is a test line.");
         counter.addLine("This is another test line!");
-        int characterCount = counter.getCharacterCount();
-        Assertions.assertEquals(46, characterCount);
+        //Expected
+        int expected = 46;
+        //Actual
+        int actual = counter.getCharacterCount();
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testLineCount() //Testar antal rader utan att användaren skriver stop.
     {
+        //Arrange
         TextCounter counter = new TextCounter();
         counter.addLine("Test line 1");
         counter.addLine("Test line 2");
         counter.addLine("Test line 3");
-        int lineCount = counter.getLineCount();
-        Assertions.assertEquals(3, lineCount);
+        //Expected
+        int expected = 3;
+        //Actual
+        int actual = counter.getLineCount();
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testLineCountWithStop()
     {
+        //Arrange
         TextCounter counter = new TextCounter();
         counter.addLine("Test line 1");
         counter.addLine("Test line 2");
         counter.addLine("stop");
-        int lineCount = counter.getLineCount();
-        Assertions.assertEquals(2, lineCount);
+        //Expected
+        int expected = 2;
+        //Actual
+        int actual = counter.getLineCount();
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testWordCount()
     {
+        //Arrange
         TextCounter counter = new TextCounter();
         counter.addLine("This is a test.");
         counter.addLine("Count these words.");
-        int wordCount = counter.getWordCount();
-        Assertions.assertEquals(7, wordCount);
+        //Expected
+        int expected = 7;
+        //Actual
+        int actual = counter.getWordCount();
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -65,15 +81,19 @@ public class TextCounterTest
     @Test
     public void testLongestWords()
     {
+        //Arrange
         TextCounter counter = new TextCounter();
         counter.addLine("This is a test.");
         counter.addLine("In this test we are testing the result");
         counter.addLine("of our efforts to show words that");
         counter.addLine("have the same length as each other");
         counter.addLine("Seven letter words, such as tripods and bIcYcLe");
+        //Expected
+        String expected = "testing, efforts, tripods, bIcYcLe";
+        //Actual
         ArrayList<String> longestWords = counter.getLongestWords();
-        String longestWordsWithSplit = String.join(", ", longestWords);
-        Assertions.assertEquals("testing, efforts, tripods, bIcYcLe", longestWordsWithSplit); //Förväntat resultat skrivs ut med komma-tecken som split
+        String actual = String.join(", ", longestWords); //Egentligen inte så bra, men utskrivningen sker så i scriptet. Man kan göra en metod av det.
+        Assertions.assertEquals(expected, actual); //Förväntat resultat skrivs ut med komma-tecken som split
     }
     //</editor-fold>
 
