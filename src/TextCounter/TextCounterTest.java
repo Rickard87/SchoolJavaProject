@@ -69,13 +69,19 @@ public class TextCounterTest
     @Test
     public void testLongestWord()
     {
+        //Arrange
         TextCounter counter = new TextCounter();
         counter.addLine("This is a test.");
         counter.addLine("The longest word in this test is 'nationalencyklopedin'."); //Längsta ordet avslutas med punkt
-        String longestWord = counter.getLongestWord();
-        Assertions.assertEquals("'nationalencyklopedin'", longestWord); //Förväntat resultat, utan punkt
-        String longestWordFromList = counter.getLongestWords().get(0);
-        Assertions.assertEquals(("'nationalencyklopedin'"), longestWordFromList); //Vi förväntar oss också samma ord från ordlistan på plats 0.
+        //Expected
+        String expected = "'nationalencyklopedin'";
+        //Actual
+        String actual = counter.getLongestWord();
+        Assertions.assertEquals(expected, actual); //Förväntat resultat, utan punkt
+        //Samma ord förekommer i listan för de längsta orden med index 0.
+        //Actual2
+        actual = counter.getLongestWords().get(0);
+        Assertions.assertEquals(expected, actual); //Vi förväntar oss också samma ord från ordlistan på plats 0.
     }
 
     @Test
@@ -99,38 +105,82 @@ public class TextCounterTest
 
     //<editor-fold desc="Tester för korrekt terminering">
     @Test
-    public void testUserTypedStopLowerCase() //Testar om boolean userTypedStop() deklareras 'false' med endast gemener
+    public void testUserTypesStopLowerCase() //Testar om boolean userTypedStop() deklareras 'false' med endast gemener
     {
+        //Arrange
         TextCounter counter = new TextCounter();
         counter.addLine("This is a test.");
         counter.addLine("Another line.");
-        Assertions.assertFalse(counter.userTypedStop());
+
+        //Expected = False
+
+        //Actual
+        boolean actual = counter.userTypedStop();
+        Assertions.assertFalse(actual);
+        //Arrange
         counter.addLine("stop");
-        Assertions.assertTrue(counter.userTypedStop());
+
+        //Expected = True
+
+        //Actual2
+        actual = counter.userTypedStop();
+        Assertions.assertTrue(actual);
     }
 
     @Test
-    public void testUserTypedStopUpperCase() //Testar om boolean userTypedStop() deklareras 'false' oavsett case sensitivity
+    public void testUserTypesStopUpperCase() //Testar om boolean userTypedStop() deklareras 'false' oavsett case sensitivity
     {
+        //Arrange
         TextCounter counter = new TextCounter();
         counter.addLine("This is a test.");
         counter.addLine("Another line.");
-        Assertions.assertFalse(counter.userTypedStop());
+
+        //Expected = False
+
+        //Actual
+        boolean actual = counter.userTypedStop();
+        Assertions.assertFalse(actual);
+        //Arrange
         counter.addLine("Stop");
-        Assertions.assertTrue(counter.userTypedStop());
+
+        //Expected = True
+
+        //Actual2
+        actual = counter.userTypedStop();
+        Assertions.assertTrue(actual);
     }
 
     @Test
     public void testUserTypedStopAndBlankSpace() //Testar om boolean userTypedStop() fortfarande är 'true' med blanksteg/utropstecken efter 'stop'
     {
+        //Arrange
         TextCounter counter = new TextCounter();
         counter.addLine("This is a test.");
         counter.addLine("Another line.");
-        Assertions.assertFalse(counter.userTypedStop());
+
+        //Expected = False
+
+        //Actual
+        boolean actual = counter.userTypedStop();
+        Assertions.assertFalse(actual);
+
+        //Arrange
         counter.addLine("stop ");
-        Assertions.assertFalse(counter.userTypedStop());
+
+        //Expected = False
+
+        //Actual
+        actual = counter.userTypedStop();
+        Assertions.assertFalse(actual);
+
+        //Arrange
         counter.addLine("stop!");
-        Assertions.assertFalse(counter.userTypedStop());
+
+        //Expected = False
+
+        //Actual
+        actual = counter.userTypedStop();
+        Assertions.assertFalse(actual);
     }
     //</editor-fold>
 }
